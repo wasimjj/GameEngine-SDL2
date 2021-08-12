@@ -1,0 +1,16 @@
+{
+	"Name" : "Bullet",
+  "Components": [
+    {
+      "Type": "TextureComponent",
+      "Texture": "Bullet.png",
+      "Width": 10,
+      "Height": 10,
+      "PositionX": 200,
+      "PositionY": 480
+    },
+    {
+      "Type": "BulletComponent"
+    }
+  ]
+}
