@@ -33,5 +33,5 @@ void EntityComponent::UnInitialize()
 void EntityComponent::Destroy()
 {
 	Engine::Get()->GetActiveScene()->RemoveEntity(m_Owner);
-	delete m_Owner;
+	//elete m_Owner;
 }

@@ -2,6 +2,7 @@
 #include "EntityComponent.h"
 #include "Engine.h"
 #include "ResourceManager.h"
+#include "Scene.h"
 
 void Entity::LoadFromConfig(nlohmann::json Config)
 {
@@ -72,4 +73,29 @@ void Entity::AddComponent(EntityComponent* Component)
 void Entity::RemoveComponent(EntityComponent* Component)
 {
 	auto RetIt = std::remove(m_Components.begin(), m_Components.end(), Component);
+}
+Entity* Entity::Clone() const
+{
+
+	auto clone = new Entity(*this);
+	std::list<EntityComponent*> components;
+	int size = clone->m_Name.size() +1;
+	char* name = new char[size];
+	memcpy(name, clone->m_Name.c_str(), size);
+	clone->m_Name = name;
+	for (auto component : this->m_Components)
+	{
+		auto a = component->Clone();
+		if (a  != nullptr)
+		{
+			components.push_back(a);
+			a->SetOwner(clone);
+		}
+	}
+	clone->m_Name = "clone";
+	clone->m_Components.clear();
+	clone->m_Components = components;
+	clone->Initialize();
+	Engine::Get()->GetActiveScene()->AddEntity(clone);
+	return clone;
 }

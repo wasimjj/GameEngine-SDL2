@@ -18,6 +18,7 @@ public:
 
 	void AddComponent(EntityComponent* Component);
 	void RemoveComponent(EntityComponent* Component);
+	Entity* Clone() const;
 
 	template <typename ComponentType>
 	ComponentType* GetComponent()

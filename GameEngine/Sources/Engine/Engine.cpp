@@ -17,6 +17,8 @@ Engine::Engine()
 
 Engine::~Engine()
 {
+	delete m_ActiveScene;
+	delete m_ResourceManager;
 	printf("Engine deleted.");
 }
 

@@ -21,7 +21,7 @@ public:
 	void RemoveEntity(Entity* Entity);
 
 	template<typename componentType>
-	std::list<componentType*> GetComponents()
+	std::list<componentType*> GetComponents() // Will used for collision and other stuff needed
 	{
 		std::list<componentType*> list;
 
@@ -34,7 +34,20 @@ public:
 		}
 		return list;
 	}
+	template<typename componentType>
+	componentType* FindComponent()
+	{
 
+		for (Entity* entity : m_Entities)
+		{
+			if (componentType* typedComponent = entity->GetComponent<componentType>())
+			{
+				return typedComponent;
+			}
+		}
+		return nullptr;
+	}
+	static Entity* Instantiate(const Entity* entity);
 private:
 	void LoadSceneFromLayout(nlohmann::json Content, nlohmann::json Legend);
 

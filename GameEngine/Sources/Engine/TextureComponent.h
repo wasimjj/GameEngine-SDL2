@@ -28,6 +28,8 @@ public:
 	void CheckCollisionEnter();
 	void SetTextureFromAssetName(std::string Name);
 	void SetColliderEnable(const bool Status) { IsColliderEnable = Status; };
+	void SetActive(const bool Status) { IsActive = Status; };
+	bool GetActive()const { return IsActive; };
 	void SetPosition(int x, int y);
 	void SetScale(int w, int h);
 	SDL_Rect& GetRectangle() { return m_Rectangle; }
@@ -35,6 +37,7 @@ public:
 
 private:
 	bool IsColliderEnable;
+	bool IsActive;
 	std::string TexturePath;
 	SDL_Rect m_Rectangle;
 	std::list<TextureComponent*> ListOfTextureComponents;

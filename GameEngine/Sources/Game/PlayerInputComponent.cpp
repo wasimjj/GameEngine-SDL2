@@ -1,5 +1,6 @@
 #include "PlayerInputComponent.h"
 #include "TextureComponent.h"
+#include "BulletComponent.h"
 #include "Entity.h"
 #include "Engine.h"
 #include "Scene.h"
@@ -20,6 +21,11 @@ void PlayerInputComponent::Initialize()
 	m_TextureComponent = GetOwner()->GetComponent<TextureComponent>();
 	Rectangle = &m_TextureComponent->GetRectangle();
 
+}
+
+void PlayerInputComponent::BeginStart()
+{
+	m_BulletComponent = Engine::Get()->GetActiveScene()->FindComponent<BulletComponent>();
 }
 
 void PlayerInputComponent::Update(float DeltaTime)
@@ -53,7 +59,13 @@ void PlayerInputComponent::Update(float DeltaTime)
 						Rectangle->x += Speed / 30;
 						break;
 					case SDL_SCANCODE_RETURN:
-						Destroy();
+						if (m_BulletComponent != nullptr)
+						{
+							auto Bullet =  m_BulletComponent->GetOwner()->Clone();
+						 	Bullet->GetComponent<BulletComponent>()->SetPosition(400,500);
+							Bullet->GetComponent<BulletComponent>()->SetActive(true);
+
+						}
 					break;
 					default:
 						break;

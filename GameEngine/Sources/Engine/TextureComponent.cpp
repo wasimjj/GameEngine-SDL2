@@ -16,6 +16,7 @@ TextureComponent::TextureComponent()
 
 TextureComponent::~TextureComponent()
 {
+	free((void*)TexturePath.c_str());
 	std::cout<< "Texture Component Deleted..." << std::endl;
 }
 
@@ -39,6 +40,7 @@ void TextureComponent::Initialize()
 
 void TextureComponent::BeginStart()
 {
+	IsActive = true;
 	ListOfTextureComponents = Engine::Get()->GetActiveScene()->GetComponents<TextureComponent>();
 }
 
@@ -48,6 +50,8 @@ void TextureComponent::UnInitialize()
 
 void TextureComponent::Update(float DeltaTime)
 {
+	if (!IsActive)
+		return;
 	if (IsColliderEnable)
 	{
 		CheckCollisionEnter();
@@ -56,8 +60,10 @@ void TextureComponent::Update(float DeltaTime)
 
 void TextureComponent::Draw()
 {
-	SDL_Surface* Surface = IMG_Load(TexturePath.c_str());
-	SDL_Texture* Texture = SDL_CreateTextureFromSurface(Engine::Get()->GetRenderer(), Surface);
+	if (!IsActive)
+		return;
+	auto Surface = IMG_Load(TexturePath.c_str());
+	auto Texture = SDL_CreateTextureFromSurface(Engine::Get()->GetRenderer(), Surface);
 	SDL_FreeSurface(Surface);
 
 	SDL_RenderCopy(Engine::Get()->GetRenderer(), Texture, nullptr, &m_Rectangle);

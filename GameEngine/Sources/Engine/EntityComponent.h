@@ -10,7 +10,7 @@ class EntityComponent
 public:
 	EntityComponent() = delete;
 	EntityComponent(Entity* Owner);
-	
+	virtual ~EntityComponent() { delete m_Owner; };
 	virtual EntityComponent* Clone() const = 0;
 
 	virtual void LoadFromConfig(nlohmann::json Config);
