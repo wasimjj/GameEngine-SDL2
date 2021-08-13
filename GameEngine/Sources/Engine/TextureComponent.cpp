@@ -36,6 +36,9 @@ void TextureComponent::LoadFromConfig(nlohmann::json Config)
 
 void TextureComponent::Initialize()
 {
+	Surface = IMG_Load(TexturePath.c_str());
+	Texture = SDL_CreateTextureFromSurface(Engine::Get()->GetRenderer(), Surface);
+	SDL_FreeSurface(Surface);
 }
 
 void TextureComponent::BeginStart()
@@ -62,10 +65,6 @@ void TextureComponent::Draw()
 {
 	if (!IsActive)
 		return;
-	auto Surface = IMG_Load(TexturePath.c_str());
-	auto Texture = SDL_CreateTextureFromSurface(Engine::Get()->GetRenderer(), Surface);
-	SDL_FreeSurface(Surface);
-
 	SDL_RenderCopy(Engine::Get()->GetRenderer(), Texture, nullptr, &m_Rectangle);
 }
 

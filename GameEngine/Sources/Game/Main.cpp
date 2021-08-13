@@ -1,10 +1,11 @@
 #define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
 #include "Engine.h"
 #include "BulletComponent.h"
 #include "ResourceManager.h"
 #include "TextureComponent.h"
 #include "PlayerInputComponent.h"
-#include <crtdbg.h>
 int main(int argc, char* argv[])
 {
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
@@ -20,6 +21,7 @@ int main(int argc, char* argv[])
 
 	Engine::Get()->MainLoop();
 	Engine::Get()->ShutDown();
-	_CrtDumpMemoryLeaks();
+	free(ResourceManagerPtr);
+
 	return 0;
 }

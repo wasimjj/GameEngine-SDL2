@@ -41,5 +41,7 @@ private:
 	std::string TexturePath;
 	SDL_Rect m_Rectangle;
 	std::list<TextureComponent*> ListOfTextureComponents;
+	SDL_Surface* Surface;
+	SDL_Texture* Texture;
 	
 };

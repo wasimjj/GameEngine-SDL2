@@ -18,7 +18,6 @@ Engine::Engine()
 Engine::~Engine()
 {
 	delete m_ActiveScene;
-	delete m_ResourceManager;
 	printf("Engine deleted.");
 }
 
@@ -58,6 +57,7 @@ void Engine::MainLoop()
 	bool Close = false;
 	unsigned int CurrentTime = SDL_GetTicks();
 	unsigned int LastTime = CurrentTime;
+	SDL_Event Event;
 
 	while (!Close)
 	{
@@ -65,7 +65,6 @@ void Engine::MainLoop()
 		while (!Close && CurrentTime > LastTime + TimePerFrameInMs)
 		{
 			m_Events.clear();
-			SDL_Event Event;
 			while (SDL_PollEvent(&Event))
 			{
 				if (Event.type == SDL_QUIT || Event.type == SDL_KEYDOWN && Event.key.keysym.scancode == SDL_SCANCODE_ESCAPE)
@@ -86,7 +85,6 @@ void Engine::MainLoop()
 			}
 
 			LastTime += TimePerFrameInMs;
-			//Draw();
 		}
 
 		Draw();

@@ -31,7 +31,7 @@ void PlayerInputComponent::BeginStart()
 void PlayerInputComponent::Update(float DeltaTime)
 {
 	const int Speed = 300;
-	std::vector<SDL_Event> Events = Engine::Get()->GetEvents();
+	std::list<SDL_Event> Events = Engine::Get()->GetEvents();
 	EntityComponent* component = GetOwner()->GetComponent<EntityComponent>();
 
 	for (const SDL_Event& Event : Events)

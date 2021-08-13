@@ -5,6 +5,7 @@
 #include <SDL_timer.h>
 #include <vector>
 #include <string>
+#include <list>
 
 class Scene;
 class ResourceManager;
@@ -23,7 +24,7 @@ public:
 	SDL_Renderer* GetRenderer() { return m_Renderer; }
 	SDL_Window* GetWindow() { return m_Window; }
 	ResourceManager* GetResourceManager() { return m_ResourceManager; }
-	const std::vector<SDL_Event>& GetEvents() { return m_Events; }
+	const std::list<SDL_Event>& GetEvents() { return m_Events; }
 	void SetActiveScene(Scene* Scene) { m_ActiveScene = Scene; }
 	Scene* GetActiveScene() const { return m_ActiveScene; }
 	void CreateActiveSceneFromTemplate(std::string Name);
@@ -40,5 +41,5 @@ private:
 	unsigned int TimePerFrameInMs;
 	float TimePerFramInSceonds;
 
-	std::vector<SDL_Event> m_Events;
+	std::list<SDL_Event> m_Events;
 };
