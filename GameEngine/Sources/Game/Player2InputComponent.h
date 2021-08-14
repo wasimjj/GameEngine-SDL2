@@ -1,25 +1,23 @@
 #pragma once
-
-#include "EntityComponent.h"
 #include "TankBodyComponent.h"
 
 class BulletComponent;
 class TextureComponent;
-class PlayerInputComponent : public EntityComponent
+class Player2InputComponent : public EntityComponent
 {
 
 public:
-	PlayerInputComponent(Entity* Owner);
-	PlayerInputComponent();
+	Player2InputComponent(Entity* Owner);
+	Player2InputComponent();
 
-	virtual EntityComponent* Clone() const override { return new PlayerInputComponent(*this); }
+	virtual EntityComponent* Clone() const override { return new Player2InputComponent(*this); }
 
 	virtual void Initialize() override;
 	virtual void BeginStart() override;
 	virtual void Update(float DeltaTime) override;
 	virtual void LoadFromConfig(nlohmann::json Config) override;
 
-	void UpdateDirection( DirectionType Direction);
+	void UpdateDirection(DirectionType Direction);
 	void Fire();
 private:
 	BulletComponent* m_BulletComponent;

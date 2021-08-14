@@ -2,7 +2,7 @@
 
 #include <vector>
 #include <nlohmann/json.hpp>
-
+#include <iostream>
 class EntityComponent;
 
 class Entity
@@ -15,10 +15,11 @@ public:
 	void Update(float DeltaTime);
 	void Draw();
 	void UnInitialize();
-
+	void Destroy();
 	void AddComponent(EntityComponent* Component);
 	void RemoveComponent(EntityComponent* Component);
 	Entity* Clone() const;
+	~Entity() { printf("my name is %s\n" , m_Name); }
 
 	template <typename ComponentType>
 	ComponentType* GetComponent()
@@ -34,6 +35,6 @@ public:
 	}
 	
 private:
-	std::list<EntityComponent*> m_Components;
+	std::vector<EntityComponent*> m_Components;
 	std::string m_Name;
 };

@@ -1,0 +1,24 @@
+{
+	"Name" : "Player2",
+  "Components": [
+    {
+      "Type": "TextureComponent",
+      "Texture": "BlueTankFront.png",
+      "Width": 50,
+      "Height": 45,
+      "PositionX": 200,
+      "PositionY": 60
+    },
+    {
+      "Type": "Player2InputComponent",
+      "Id": 2
+    },
+    {
+      "Type": "TankBodyComponent",
+      "Texture1": "BlueTankFront.png",
+      "Texture2": "BlueTankDown.png",
+      "Texture3": "BlueTankleft.png",
+      "Texture4": "BlueTankRight.png"
+    }
+  ]
+}

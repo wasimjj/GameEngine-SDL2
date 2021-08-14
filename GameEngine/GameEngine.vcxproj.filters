@@ -48,6 +48,12 @@
     <ClCompile Include="Sources\Game\BulletComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Sources\Game\TankBodyComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Game\Player2InputComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sources\Engine\Engine.h">
@@ -74,10 +80,13 @@
     <ClInclude Include="Sources\Engine\EngineUtils.h">
       <Filter>Source Files\Engine</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Game\PlayerTank.h">
+    <ClInclude Include="Sources\Game\TankBodyComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Game\BulletComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Game\Player2InputComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

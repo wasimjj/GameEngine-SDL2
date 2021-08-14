@@ -1,17 +1,24 @@
 {
 	"Name" : "Player",
-	"Components" : 
-	[
-		{
-			"Type" : "TextureComponent",
-			"Texture" : "RedTankFront.png",
-			"Width" : 50,
-			"Height" : 45,
-			"PositionX" : 300,
-			"PositionY" : 480
-		},
-		{
-			"Type" : "PlayerInputComponent"
-		}
-	]
+  "Components": [
+    {
+      "Type": "TextureComponent",
+      "Texture": "RedTankFront.png",
+      "Width": 50,
+      "Height": 45,
+      "PositionX": 300,
+      "PositionY": 480
+    },
+    {
+      "Type": "PlayerInputComponent",
+      "Id": 1
+    },
+    {
+      "Type": "TankBodyComponent",
+      "Texture1": "RedTankFront.png",
+      "Texture2": "RedTankDown.png",
+      "Texture3": "RedTankleft.png",
+      "Texture4": "RedTankRight.png"
+    }
+  ]
 }

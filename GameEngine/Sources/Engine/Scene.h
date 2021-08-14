@@ -47,7 +47,10 @@ public:
 		}
 		return nullptr;
 	}
-	static Entity* Instantiate(const Entity* entity);
+	int GetTotalEntities() {
+		return m_Entities.size();
+	}
+		 
 private:
 	void LoadSceneFromLayout(nlohmann::json Content, nlohmann::json Legend);
 

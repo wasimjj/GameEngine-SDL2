@@ -32,6 +32,7 @@ public:
 	bool GetActive()const { return IsActive; };
 	void SetPosition(int x, int y);
 	void SetScale(int w, int h);
+	void SetTexture(std::string& path);
 	SDL_Rect& GetRectangle() { return m_Rectangle; }
 	OnCollisionEnterDelegate OnCollisionEnterCallback;
 
@@ -41,7 +42,7 @@ private:
 	std::string TexturePath;
 	SDL_Rect m_Rectangle;
 	std::list<TextureComponent*> ListOfTextureComponents;
-	SDL_Surface* Surface;
-	SDL_Texture* Texture;
+	SDL_Surface* m_Surface;
+	SDL_Texture* m_Texture;
 	
 };

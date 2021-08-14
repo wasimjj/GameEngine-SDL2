@@ -2,6 +2,7 @@
 #include <vector>
 #include "EntityComponent.h"
 #include "TextureComponent.h"
+#include "TankBodyComponent.h"
 class BulletComponent : public EntityComponent
 {
 
@@ -16,10 +17,14 @@ public:
 	void OnCollisionEnter(TextureComponent* TextureComponent);
 	void SetActive(const bool Status) { m_TextureComponent->SetActive(Status); }
 	void SetPosition(const int x, const int y) { m_TextureComponent->SetPosition(x,y); }
-
+	void SetDirection( DirectionType Direction)  { m_Direction = Direction; }
+	int GetWidth() const { return m_Rectangle->w; }
+	int GetHeight() const { return m_Rectangle->h; }
 private:
-
+	DirectionType m_Direction;
 	TextureComponent* m_TextureComponent;
-	SDL_Rect* MyRectangle ;
+	SDL_Rect* m_Rectangle ;
 	std::list<TextureComponent*> ListOfTextureComponent;
+	int m_Speed = 3;
+	float LifeSpam = -1.0f;
 };

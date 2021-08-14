@@ -22,6 +22,7 @@ void Scene::LoadFromConfig(nlohmann::json Config)
 			{
 				nlohmann::json EntityTemplateConfig = ResourceManagerPtr->GetJsonConfig(TypeName, ResourceType::Entity);
 				NewEntity->LoadFromConfig(EntityTemplateConfig);
+				//NewEntity->setname
 			}
 			else
 			{
@@ -83,7 +84,6 @@ void Scene::Startgame()
 void Scene::AddEntity(Entity* Entity)
 {
 	m_Entities.push_back(Entity);
-	printf("\nTotal Entities::%d", m_Entities.size());
 
 }
 
@@ -92,12 +92,6 @@ void Scene::RemoveEntity(Entity* Entity)
 	auto RetIt = std::remove(m_Entities.begin(), m_Entities.end(), Entity);
 }
 
-Entity* Scene::Instantiate(const Entity* entity)
-{
-
-	auto newEntity = entity->Clone();
-	return nullptr;
-}
 
 void Scene::LoadSceneFromLayout(nlohmann::json Content, nlohmann::json Legend)
 {

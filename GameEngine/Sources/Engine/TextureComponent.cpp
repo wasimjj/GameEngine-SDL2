@@ -17,7 +17,6 @@ TextureComponent::TextureComponent()
 TextureComponent::~TextureComponent()
 {
 	free((void*)TexturePath.c_str());
-	std::cout<< "Texture Component Deleted..." << std::endl;
 }
 
 void TextureComponent::LoadFromConfig(nlohmann::json Config)
@@ -36,9 +35,9 @@ void TextureComponent::LoadFromConfig(nlohmann::json Config)
 
 void TextureComponent::Initialize()
 {
-	Surface = IMG_Load(TexturePath.c_str());
-	Texture = SDL_CreateTextureFromSurface(Engine::Get()->GetRenderer(), Surface);
-	SDL_FreeSurface(Surface);
+	m_Surface = IMG_Load(TexturePath.c_str());
+	m_Texture = SDL_CreateTextureFromSurface(Engine::Get()->GetRenderer(), m_Surface);
+	SDL_FreeSurface(m_Surface);
 }
 
 void TextureComponent::BeginStart()
@@ -65,24 +64,21 @@ void TextureComponent::Draw()
 {
 	if (!IsActive)
 		return;
-	SDL_RenderCopy(Engine::Get()->GetRenderer(), Texture, nullptr, &m_Rectangle);
+	SDL_RenderCopy(Engine::Get()->GetRenderer(), m_Texture, nullptr, &m_Rectangle);
 }
 
 void TextureComponent::CheckCollisionEnter()
 {
 	ListOfTextureComponents = Engine::Get()->GetActiveScene()->GetComponents<TextureComponent>();
-
-	if (IsColliderEnable)
+	if (!IsColliderEnable)
+		return;
+	for (TextureComponent* textureComponent : ListOfTextureComponents)
 	{
-		for (TextureComponent* textureComponent : ListOfTextureComponents)
+		if ( this != textureComponent &&  SDL_HasIntersection(&m_Rectangle, &textureComponent->m_Rectangle))
 		{
-			if ( this != textureComponent &&  SDL_HasIntersection(&m_Rectangle, &textureComponent->m_Rectangle))
+			if (OnCollisionEnterCallback)
 			{
-				if (OnCollisionEnterCallback)
-				{
-					OnCollisionEnterCallback(textureComponent);
-
-				}
+				OnCollisionEnterCallback(textureComponent);
 			}
 		}
 	}
@@ -103,5 +99,11 @@ void TextureComponent::SetScale(int w, int h)
 {
 	m_Rectangle.w = w;
 	m_Rectangle.h = h;
+}
+
+void TextureComponent::SetTexture(std::string& path)
+{
+	TexturePath = path;
+	Initialize();
 }
 

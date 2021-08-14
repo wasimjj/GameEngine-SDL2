@@ -6,6 +6,12 @@
     },
     {
       "Type": "Bullet"
+    },
+    {
+      "Type": "Bullet2"
+    },
+    {
+      "Type": "Player2"
     }
   ],
 	"SceneLayout" : 

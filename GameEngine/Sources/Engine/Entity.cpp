@@ -43,6 +43,7 @@ void Entity::BeginStart()
 
 void Entity::Update(float DeltaTime)
 {
+
 	for (EntityComponent* Component : m_Components)
 	{
 		Component->Update(DeltaTime);
@@ -65,6 +66,12 @@ void Entity::UnInitialize()
 	}
 }
 
+void Entity::Destroy()
+{
+	m_Components.clear();
+	Engine::Get()->GetActiveScene()->RemoveEntity(this);
+}
+
 void Entity::AddComponent(EntityComponent* Component)
 {
 	m_Components.push_back(Component);
@@ -78,7 +85,7 @@ Entity* Entity::Clone() const
 {
 
 	auto clone = new Entity(*this);
-	std::list<EntityComponent*> components;
+	std::vector<EntityComponent*> components;
 	int size = clone->m_Name.size() +1;
 	char* name = new char[size];
 	memcpy(name, clone->m_Name.c_str(), size);
@@ -92,7 +99,7 @@ Entity* Entity::Clone() const
 			a->SetOwner(clone);
 		}
 	}
-	clone->m_Name = "clone";
+	clone->m_Name = "clone"+ Engine::Get()->GetActiveScene()->GetTotalEntities();
 	clone->m_Components.clear();
 	clone->m_Components = components;
 	clone->Initialize();
