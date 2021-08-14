@@ -1,6 +1,5 @@
 #include "Player2InputComponent.h"
 #include "TextureComponent.h"
-#include "Bullet2Component.h"
 #include "BulletComponent.h"
 #include <algorithm>
 #include "Entity.h"
